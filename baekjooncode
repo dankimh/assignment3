@@ -1,0 +1,161 @@
+//2798
+let n=prompt("","");
+let m=prompt("","");
+let a=new Array();
+let ans=0;
+function max(p,q){
+    return p>q:p?q;
+}
+function fun(pos,cnt,num){
+    if(cnt==3){
+        if(sum<=m){
+            ans=max(ans,sum);
+            return;
+        }
+    }
+    if(sum>m||pos>=n){
+        return;
+    }
+    fun(pos+1,cnt+1,sum+a[pos]);
+    fun(pos+1,cnt,sum);
+}
+for(let i=0;i<n;i++){
+    let im=prompt("","");
+    a[i]=im;
+}
+fun(0,0,0);
+document.write(ans);
+
+
+//9461
+const NMAX=100;
+let p=[0,1,1,1,2,2,3,4,5,7,9];
+for(let i=11;i<NMAX;i++){
+    p[i]=p[i-1]+p[i-5];
+}
+let t=prompt("","");
+while(t--){
+    let s=prompt("","");
+    document.write(p[s]);
+    document.write("<br>");
+}
+
+//2851
+let a=new Array();
+for(let i=0;i<10;i++){
+    a[i]=prompt("mario","");
+}
+let sum=0;
+let ch=0;
+for(let i=0;i<10;i++){
+    let asum=sum+a[i];
+    if(asum>=100){
+        if(asum-100<=100-sum){
+            document.write(asum);
+        }
+        else document.write(sum);
+        ch=1;
+    }
+    sum=asum;
+}
+if(ch==0){
+document.write(sum);
+}
+
+//11726
+let a=new Array();
+let n=prompt("n","");
+a[0]=1;
+a[1]=1;
+for(let i=2;i<=n;i++){
+    a[i]=(a[i-1]+a[i-2])%10007;
+}
+document.write(a[n]%10007);
+
+//1018 - 
+const INF=99999999;
+const MAX=50;
+let m,n;
+let board=[];
+let white=['WBWBWBWB','BWBWBWBW','WBWBWBWB','BWBWBWBW','WBWBWBWB','BWBWBWBW','WBWBWBWB','BWBWBWBW'];
+let black=['BWBWBWBW','WBWBWBWB','BWBWBWBW','WBWBWBWB','BWBWBWBW','WBWBWBWB','BWBWBWBW','WBWBWBWB'];
+
+function wchange(y,x){
+    let cnt=0;
+    for(let i=y;i<y+8;i++){
+        for(let j=x;j<x+8;j++){
+            if(board[i][j]!==white[i-y][j-x])cnt++;
+        }
+    }
+    return cnt;
+}
+function bchange(y,x){
+    let cnt=0;
+    for(let i=y;i<y+8;i++){
+        for(let j=x;j<x+8;j++){
+            if(board[i][j]!==black[i-y][j-x])cnt++;
+        }
+    }
+    return cnt;
+}
+function min(a,b){
+    return a<b?a:b;
+}
+
+n=prompt("n","");
+m=prompt("m","");
+for(let i=0;i<n;i++){
+    board[i]=prompt("board","");
+}
+let res=INF;
+for(let i=0;i+7<n;i++){
+    for(let j=0;j+7<m;j++){
+        res=min(res,min(white(i,j),black(i,j)));
+    }
+}
+
+//10825 - struct를 사용하려고 했으나 작동하지 않음
+function str(){
+    let name,kor,eng,math;
+}
+
+function jinsil (u,v){
+    if(u.kor>v.kor)return true;
+    else if(u.kor==v.kor){
+        if(u.eng<v.eng)return true;
+        else if(u.eng==v.eng){
+            if(u.math>v.math)return true;
+            else if(u.math==v.math){
+                return u.name<v.name;
+            }
+        }
+    }
+    return false;
+}
+
+let max=0;
+let n=prompt("n","");
+let a=new Array();
+for(let i=0;i<n;i++){
+    a[i]=new str();
+    a[i].name=prompt("name","");
+    a[i].kor=prompt("kor","");
+    a[i].eng=prompt("eng","");
+    a[i].math=prompt("math","");
+}
+document.write(jinsil(a[0].name));
+for(let i=0;i<n;i++){
+    for(let j=i+1;i<n;j++){
+        if(!jinsil(a[i],a[j])){
+            let imsi;
+            imsi=a[j];
+            a[j]=a[i];
+            a[i]=imsi;
+        }
+    }
+}
+document.write('wtf');
+for(let i=0;i<n;i++){
+    document.write(a[i].name);
+    document.write("<br>");
+}
